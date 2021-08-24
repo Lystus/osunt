@@ -15,6 +15,47 @@ function refresh(){
 			};
 		}
 	);
+
+	const downloadLinks = document.querySelectorAll('a.beatmapset-panel__menu-item');
+	console.log(`Donwload links: ${downloadLinks.length}`);
+	for (let i = 0; i < downloadLinks.length; i++) {
+		const element = downloadLinks[i];
+		const downloadURLSplit = element.href.split('/');
+		downloadURLSplit.pop();
+		const songId = downloadURLSplit.pop();
+		element.addEventListener('click', onDownloadClick);
+	}
+}
+
+function onDownloadClick(event) {
+	let element = undefined;
+	if(event.srcElement.nodeName === 'a' || event.srcElement.nodeName === 'A'){
+		element = event.srcElement;
+	} else {
+		element = event.srcElement.parentElement;
+	}
+
+	const downloadURLSplit = element.href.split('/');
+	downloadURLSplit.pop();
+	const songId = downloadURLSplit.pop();
+	chrome.storage.local.get(
+		"downloaded",
+		function(item){
+			downloaded = item["downloaded"];
+			if (!downloaded.includes(songId)){
+				downloaded.push(songId);
+				chrome.storage.local.set(
+					{"downloaded": downloaded},
+					function(){
+						console.log("Storage set");
+					}
+				);
+			} else {
+				console.log("Song already downloaded");
+				alert("Note: you have already downloaded this song!");
+			}
+		}
+	);
 }
 
 function addToStorage(){
