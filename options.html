@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Osu Songs Marked Settings</title>
+</head>
+<style>
+div {
+	text-align: center;
+}
+</style>
+<body>
+
+<div id="comma-separated">
+<p>Comma-separated list of downloaded songs' ids</p>
+<input type="text" id="values">
+<button id="textsubmit">Set</button>
+</div>
+
+<div id="fileset">
+<p>Or choose the /osu!/songs/ folder<br>(e.g. C:\Users\Username\AppData\Local\osu!\Songs)</p>
+<input type = "file" webkitdirectory directory id = "files">
+</div>
+
+<div id="setcolor">
+<p>Background color of the already downloaded songs</p>
+<input type="color" id="colorpicker">
+</div>
+
+<div>
+<p id="message" style="color: green;"></p>
+</div>
+
+<script src="options.js"></script>
+</body>
+</html>
